@@ -5,14 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mvvmandretrofitplayground.R
 import com.example.mvvmandretrofitplayground.databinding.FragmentFirstBinding
+import com.example.mvvmandretrofitplayground.presentation.MainActivityVM
+import com.tminus1010.tmcommonkotlin.rx.extensions.observe
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+@AndroidEntryPoint
 class FirstFragment : Fragment() {
+    val mainActivityVM by viewModels<MainActivityVM>()
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -32,6 +39,8 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mainActivityVM.characterNames.observe(viewLifecycleOwner) { binding.textviewFirst.text = it }
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)

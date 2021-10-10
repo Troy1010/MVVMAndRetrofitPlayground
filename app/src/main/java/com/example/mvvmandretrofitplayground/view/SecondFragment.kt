@@ -1,4 +1,4 @@
-package com.example.mvvmandretrofitplayground
+package com.example.mvvmandretrofitplayground.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.mvvmandretrofitplayground.R
 import com.example.mvvmandretrofitplayground.databinding.FragmentSecondBinding
 
 /**

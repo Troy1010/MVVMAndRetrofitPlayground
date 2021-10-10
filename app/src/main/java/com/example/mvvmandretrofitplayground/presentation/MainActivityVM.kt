@@ -13,5 +13,4 @@ class MainActivityVM @Inject constructor(
         futuramaRepo.getCharacters()
             .map { it.joinToString { ", ${it.name}" } }
             .toObservable() // Using Observable type so that we don't ever have to change it later
-    val x = "rtyer"
 }

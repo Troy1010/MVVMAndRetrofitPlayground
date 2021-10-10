@@ -20,13 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    val mainActivityVM by viewModels<MainActivityVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        logz("mainActivityVM.x:${mainActivityVM.x}")
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

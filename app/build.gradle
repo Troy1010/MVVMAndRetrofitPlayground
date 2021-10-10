@@ -175,4 +175,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+
+    // # Retrofit & Rx
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+
+    // # Retrofit & Moshi
+    implementation "com.squareup.retrofit2:converter-moshi:2.4.0"
 }

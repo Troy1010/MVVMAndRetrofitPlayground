@@ -1,4 +1,4 @@
-package com.example.mvvmandretrofitplayground.data
+package com.example.mvvmandretrofitplayground.data.service
 
 import com.example.mvvmandretrofitplayground.data.model.CharactersDTOItem
 import io.reactivex.rxjava3.core.Single

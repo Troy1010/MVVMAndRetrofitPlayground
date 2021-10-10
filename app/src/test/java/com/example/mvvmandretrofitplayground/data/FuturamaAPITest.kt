@@ -1,5 +1,6 @@
 package com.example.mvvmandretrofitplayground.data
 
+import com.example.mvvmandretrofitplayground.data.service.FuturamaAPIFactory
 import org.junit.Test
 import java.util.concurrent.TimeUnit
 

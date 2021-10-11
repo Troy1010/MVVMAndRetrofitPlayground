@@ -4,6 +4,9 @@ import com.example.mvvmandretrofitplayground.data.model.CharacterDTO
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 
+/**
+ * api is from: https://sampleapis.com/api-list/futurama
+ */
 interface IFuturamaAPI {
     // Retrofit has a lot more annotations that you can use, like @Headers and @Body.
     // They're all listed out here: https://square.github.io/retrofit/

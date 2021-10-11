@@ -34,7 +34,7 @@ class FirstFragmentVM @Inject constructor(
 
     // # Presentation State
     val characterNames =
-        futuramaRepo.getCharacters()
+        futuramaRepo.characters
             .map { it.joinToString { ", ${it.name}" } }
             .toObservable() // Using Observable type so that we don't ever have to change it later
 }

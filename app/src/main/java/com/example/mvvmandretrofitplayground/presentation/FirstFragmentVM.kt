@@ -13,14 +13,14 @@ class FirstFragmentVM @Inject constructor(
     // # UserIntents
     // View Events are stuff like onClick, onLongClick, onSwipe, etc
     // UserIntents are basically more specific view events, which represent what the user was trying to do.
-    // UserIntents serve as the "input" for ViewModels. The "output" is the Presentation State and Events.
+    // UserIntents serve as the "input" for ViewModels. The "output" is the Presentation State and Events. All output must be observable (or immutable).
     fun userTryNavForward() {
-        if ((counter--) <= 0) {
+        if (counter-- <= 0) {
             counter = 3
             navToSecondFragment.onNext(Unit)
         } else {
-            // OnNext() causes the observable to emit. It's just like mutableLiveData.value = "Retry again $counter"
-            toast.onNext("Retry again $counter")
+            // subject.onNext("Retry again $counter") is just like mutableLiveData.value = "Retry again $counter"
+            showToast.onNext("Retry again $counter")
         }
     }
 
@@ -28,8 +28,9 @@ class FirstFragmentVM @Inject constructor(
     private var counter = 3
 
     // # Presentation Events
-    // Subjects are a way to create observables when you don't have one
-    val toast = PublishSubject.create<String>()
+    // Subjects are very similar to MutableLiveData. They are a way to create a observable when you don't have one.
+    // BehaviorSubjects are just like MutableLiveData, but PublishSubjects are different b/c they do not remember their last value, which is good for Events.
+    val showToast = PublishSubject.create<String>()
     val navToSecondFragment = PublishSubject.create<Unit>()
 
     // # Presentation State

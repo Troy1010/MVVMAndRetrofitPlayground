@@ -38,7 +38,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // # Bind Presentation Events
         mainActivityVM.navToSecondFragment.observe(viewLifecycleOwner) { findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment) }
-        mainActivityVM.toast.observe(viewLifecycleOwner) { Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show() }
+        mainActivityVM.showToast.observe(viewLifecycleOwner) { Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show() }
         // # Bind Presentation State
         mainActivityVM.characterNames.observe(viewLifecycleOwner) { binding.textviewFirst.text = it }
         // # Call UserIntents

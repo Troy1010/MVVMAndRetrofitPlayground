@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.example.mvvmandretrofitplayground.R
 import com.example.mvvmandretrofitplayground.databinding.FragmentFirstBinding
 import com.example.mvvmandretrofitplayground.presentation.FirstFragmentVM
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.plusAssign
 
@@ -27,7 +29,6 @@ class FirstFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    var disposables = CompositeDisposable() // If you use .observe(), then you do not need this
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,19 +41,10 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // # Bind Presentation Events
-        mainActivityVM.navToSecondFragment
-            .observeOn(AndroidSchedulers.mainThread()) // If you use .observe(), then you do not need this
-            .subscribe { findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment) }
-            .also { disposables += it } // If you use .observe(), then you do not need this
-        mainActivityVM.showToast
-            .observeOn(AndroidSchedulers.mainThread()) // If you use .observe(), then you do not need this
-            .subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show() }
-            .also { disposables += it } // If you use .observe(), then you do not need this
+        mainActivityVM.navToSecondFragment.observe(viewLifecycleOwner) { findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment) }
+        mainActivityVM.showToast.observe(viewLifecycleOwner) { Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show() }
         // # Bind Presentation State
-        mainActivityVM.characterNames
-            .observeOn(AndroidSchedulers.mainThread()) // If you use .observe(), then you do not need this
-            .subscribe { binding.textviewFirst.text = it }
-            .also { disposables += it } // If you use .observe(), then you do not need this
+        mainActivityVM.characterNames.observe(viewLifecycleOwner) { binding.textviewFirst.text = it }
         // # Call UserIntents
         binding.buttonFirst.setOnClickListener { mainActivityVM.userTryNavForward() }
     }
@@ -60,6 +52,24 @@ class FirstFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        disposables.clear()
+        disposables.clear() // If you use the normal .observe(), then you do not need this
+    }
+
+
+
+
+
+
+
+
+    // TODO("The rest of this code is here b/c you do not have access to CommonLib's .observe()
+
+    private var disposables = CompositeDisposable() // If you use the normal .observe(), then you do not need this
+
+    // I created this b/c you do not have access to CommonLibs's .observe()
+    fun <T> Observable<T>.observe(lifecycleOwner: LifecycleOwner, lambda: (T) -> Unit) {
+        this.observeOn(AndroidSchedulers.mainThread())
+            .subscribe { lambda(it) }
+            .also { disposables += it }
     }
 }

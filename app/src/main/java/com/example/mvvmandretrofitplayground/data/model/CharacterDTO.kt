@@ -1,6 +1,6 @@
 package com.example.mvvmandretrofitplayground.data.model
 
-data class CharactersDTOItem(
+data class CharacterDTO(
     val age: String?,
     val gender: String?,
     val homePlanet: String?,

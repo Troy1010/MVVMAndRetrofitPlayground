@@ -9,10 +9,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import com.example.mvvmandretrofitplayground.R
 import com.example.mvvmandretrofitplayground.databinding.ActivityMainBinding
-import com.example.mvvmandretrofitplayground.presentation.MainActivityVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -30,6 +30,7 @@ class FirstFragmentVM @Inject constructor(
     // # Presentation Events
     // Subjects are very similar to MutableLiveData. They are a way to create a observable when you don't have one.
     // BehaviorSubjects are just like MutableLiveData, but PublishSubjects are different b/c they do not remember their last value, which is good for Events.
+    // For coroutines, BehaviorSubjects are just like MutableStateFlow.
     val showToast = PublishSubject.create<String>()
     val navToSecondFragment = PublishSubject.create<Unit>()
 
